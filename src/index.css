@@ -1,0 +1,12 @@
+:root {
+}
+
+.custom-datetime .rdt .form-control {
+    background: none; /* Ensure input field is transparent */
+    border: none; /* Optional: Remove border */
+    outline: none;
+  }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
