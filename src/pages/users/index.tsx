@@ -14,13 +14,6 @@ import StatusPill from "../../components/status-pill";
 import Table from "../../components/table";
 import { handleError } from "../../utils/notify";
 import { SlOptionsVertical } from "react-icons/sl";
-import {
-  useFetchCurrencies,
-  useFetchUserBalance,
-  useFetchUserCards,
-  useFetchUsers,
-  useGetCurrencies,
-} from "../../utils/api/dashboard-request";
 import UserDetailsModal from "../../components/user-components/user-details.modal";
 
 const Users = () => {
@@ -140,26 +133,6 @@ const Users = () => {
     }
   }, [shouldFetch, filters]);
 
-  const {
-    data: users,
-    isPending,
-    isError,
-    onPageChange,
-  } = useFetchUsers(filters);
-  console.log(users, "users ");
-  const { data: currencies } = useFetchCurrencies();
-  const { data: userCurrencies } = useGetCurrencies({});
-  const { data: userBalance } = useFetchUserBalance(
-    selectedUser?.accountId,
-    !!selectedUser?.accountId
-  );
-  const { data: userCards } = useFetchUserCards(
-    selectedUser?.accountId,
-    !!selectedUser?.accountId
-  );
-
-  handleError(isError);
-
   const renderMenu = (user: any) => (
     <Menu>
       <MenuButton
@@ -196,7 +169,7 @@ const Users = () => {
         </div>
 
         <div className="bg-white rounded-3xl py-5 border">
-          <Table
+          {/* <Table
             columns={columns}
             data={users?.data?.content || []}
             totalCount={users?.totalCount || 0}
@@ -204,7 +177,7 @@ const Users = () => {
             onPageChange={onPageChange}
             paginationMode="server"
             filters={filters}
-          />
+          /> */}
         </div>
       </div>
 

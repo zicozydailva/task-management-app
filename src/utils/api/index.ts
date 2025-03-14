@@ -1,11 +1,8 @@
 import axios from "axios";
-import { useAuth0 } from "@auth0/auth0-react";
 
 const BASE_API_URL = import.meta.env.VITE_BASE_URL;
 
 const useAxiosInstance = (multipart = false) => {
-  const { getAccessTokenSilently } = useAuth0();
-
   // Create the axios instance
   const instance = axios.create({
     headers: {
@@ -19,7 +16,9 @@ const useAxiosInstance = (multipart = false) => {
   instance.interceptors.request.use(
     async (config) => {
       try {
-        const token = await getAccessTokenSilently();
+        const token =
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2Q0NmEyNDFkYjhiMjM1ZGNmODIyNDciLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkdGxaYlVLak9PSU1kMUhGT1EyT2RNLlNqbEZ5cXFkTmR5cG1lOGhyRmlaaThDaG5SWlBPVWEiLCJjcmVhdGVkQXQiOiIyMDI1LTAzLTE0VDE3OjQwOjUyLjQzOFoiLCJ1cGRhdGVkQXQiOiIyMDI1LTAzLTE0VDE3OjQyOjU2Ljk1MVoiLCJfX3YiOjAsInNlc3Npb25JZCI6IkRBMXl0dnFRUVFiUFB4UzdhMzhMRiIsImlhdCI6MTc0MTk3OTcxMCwiZXhwIjoxNzQzMTg5MzEwfQ.suuBROYFur3DrXOWvvVFP5_5owsO63WFFhPTfzsKdOc";
+
         config.headers.Authorization = `Bearer ${token}`;
       } catch (error) {
         console.error("Failed to get access token", error);

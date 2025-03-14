@@ -16,4 +16,5 @@ export const APP_ROUTES = {
 
 export const queryKeys = {
   users: "users",
+  tasks: "tasks",
 };

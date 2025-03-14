@@ -3,135 +3,25 @@ import DataTable, {
   IDataTableProps,
   TableStyles,
 } from "react-data-table-component";
-import { useEffect, useState } from "react";
-
-const CustomPagination = ({
-  rowsPerPage,
-  rowCount,
-  onChangePage,
-  currentPage,
-}) => {
-  const totalPages = Math.ceil(rowCount / rowsPerPage);
-
-  const handlePrev = () => {
-    if (currentPage > 1) {
-      onChangePage(currentPage - 1);
-    }
-  };
-
-  const handleNext = () => {
-    if (currentPage < totalPages) {
-      onChangePage(currentPage + 1);
-    }
-  };
-
-  // Logic for displaying three pages dynamically
-  const getPageNumbers = () => {
-    const pageNumbers = [];
-    let startPage = currentPage - 1 > 0 ? currentPage - 1 : 1;
-
-    // If currentPage is too close to the last page, adjust startPage
-    if (startPage + 2 > totalPages) {
-      startPage = totalPages - 2 > 0 ? totalPages - 2 : 1;
-    }
-
-    for (let i = startPage; i < startPage + 3 && i <= totalPages; i++) {
-      pageNumbers.push(i);
-    }
-
-    return pageNumbers;
-  };
-
-  const pageNumbers = getPageNumbers();
-
-  return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "end",
-        alignItems: "center",
-        padding: "10px",
-        margin: "10px",
-      }}
-    >
-      <button
-        onClick={handlePrev}
-        disabled={currentPage === 1}
-        style={{
-          padding: "8px 16px",
-          backgroundColor: currentPage === 1 ? "#cccccc" : "#415AA8",
-          color: "#fff",
-          border: "none",
-          borderRadius: "4px",
-          marginRight: "8px",
-          cursor: currentPage === 1 ? "not-allowed" : "pointer",
-        }}
-      >
-        Prev
-      </button>
-
-      {/* Dynamically render page numbers */}
-      {pageNumbers.map((page) => (
-        <span
-          key={page}
-          onClick={() => onChangePage(page)}
-          style={{
-            color: currentPage === page ? "#fff" : "#000",
-            backgroundColor: currentPage === page ? "#415AA8" : "#EBEDF0",
-            padding: "10px",
-            borderRadius: "5px",
-            height: "40px",
-            width: "40px",
-            margin: "5px",
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontWeight: "bold",
-          }}
-        >
-          {page}
-        </span>
-      ))}
-
-      {/* Show ellipsis if there are more pages after the current three */}
-      {totalPages > 3 && currentPage + 1 < totalPages && (
-        <span style={{ margin: "0 5px" }}>...</span>
-      )}
-
-      <button
-        onClick={handleNext}
-        disabled={currentPage === totalPages}
-        style={{
-          padding: "8px 16px",
-          backgroundColor: currentPage === totalPages ? "#cccccc" : "#415AA8",
-          color: "#fff",
-          border: "none",
-          borderRadius: "4px",
-          marginLeft: "8px",
-          cursor: currentPage === totalPages ? "not-allowed" : "pointer",
-        }}
-      >
-        Next
-      </button>
-    </div>
-  );
-};
+import { LuLoader } from "react-icons/lu";
 
 const rowTheme: TableStyles = {
   headRow: {
     style: {
-      minHeight: "50px",
-      height: "50px",
-      backgroundColor: "#fff",
-      borderRadius: "5px",
+      minHeight: "45px",
+      height: "45px",
+      backgroundColor: "#f7f7f7",
+      borderRadius: "0px",
+      border: "1px solid #EDECF2",
+      marginBottom: "1px",
       overflow: "hidden",
     },
   },
   headCells: {
     style: {
-      backgroundColor: "#fff",
-      color: "#000",
+      borderColor: "transparent",
+      backgroundColor: "#ffffff",
+      color: "#255c57",
       fontSize: "0.8rem",
       fontWeight: 600,
     },
@@ -141,11 +31,10 @@ const rowTheme: TableStyles = {
       spacing: "spaced",
       spacingBorderRadius: "0.25rem",
       spacingMargin: "1rem",
-      borderBottomColor: "##D1D5D7 !important",
-      backgroundColor: "#fff",
-      borderRadius: "2px",
-      borderTop: "1px solid #D1D5D7",
-      borderBottom: "1px solid #D1D5D7",
+      borderBottomColor: "#f3f3f3 !important",
+      backgroundColor: "#feffff",
+      borderRadius: "5px",
+      border: "1px solid #EDECF2",
     },
     highlightOnHoverStyle: {
       backgroundColor: "#f7f7f7",
@@ -157,7 +46,7 @@ const rowTheme: TableStyles = {
       fontSize: "0.85rem",
       fontWeight: 400,
       height: "63px",
-      color: "#636971",
+      color: "#475467",
     },
   },
   pagination: {
@@ -166,7 +55,6 @@ const rowTheme: TableStyles = {
       borderTopColor: "#f3f3f3",
     },
   },
-
   table: {
     style: {
       backgroundColor: "transparent",
@@ -186,6 +74,8 @@ const denseRowTheme: TableStyles = {
     style: {
       minHeight: "24px",
       height: "32px",
+      borderRadius: "10px",
+      border: "1px solid #EDECF2",
       marginBottom: "0.5rem",
       overflow: "hidden",
     },
@@ -221,37 +111,9 @@ const SampleStyle = styled.div`
   padding: 1.5rem 2rem;
 `;
 
-// type ITableProps = IDataTableProps<any>;
-type ITableProps<T> = Omit<IDataTableProps<T>, 'data'> & {
-  paginationMode?: 'client' | 'server' | 'none';
-  filters?: any;
-  data: T[];
-  totalCount?: number;
-  loading?: boolean;
-  onPageChange?: (page: number, pageSize: number) => void;
-};
+type ITableProps = IDataTableProps<any>;
 
-export default function Table<T>(props: ITableProps<T>) {
-  const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(props.paginationPerPage || 10);
-
-  const handlePageChange = (newPage: number) => {
-    setPage(newPage);
-    props.onPageChange?.(newPage, pageSize);
-  };
-
-  const handlePerRowsChange = async (newPerPage: number, newPage: number) => {
-    setPageSize(newPerPage);
-    setPage(newPage);
-    props.onPageChange?.(newPage, newPerPage);
-  };
-
-  useEffect(() => {
-    if (props.paginationMode === 'server') {
-      props.onPageChange?.(page, pageSize);
-    }
-  }, [props.filters]);
-
+export default function Table(props: Partial<ITableProps>) {
   const ExpandableRow = ({ data }: any) => {
     const Component = props.expandableRowsComponent;
     return (
@@ -261,24 +123,17 @@ export default function Table<T>(props: ITableProps<T>) {
     );
   };
 
-  const isPaginationEnabled = props.paginationMode !== 'none';
-
   return (
     <DataTable
       columns={props.columns || []}
-      data={props.data}
+      data={props.data || []}
       customStyles={!props.dense ? rowTheme : denseRowTheme}
       expandableRowsComponent={ExpandableRow as any}
       noHeader
       responsive
       persistTableHead
       highlightOnHover
-      pagination={isPaginationEnabled}
-      paginationServer={props.paginationMode === 'server'}
-      paginationTotalRows={props.totalCount || 0}
-      onChangePage={handlePageChange}
-      onChangeRowsPerPage={handlePerRowsChange}
-      paginationComponent={isPaginationEnabled ? CustomPagination : undefined}
+      pagination
       pointerOnHover={!props.dense}
       striped={props.dense}
       {...props}
@@ -291,13 +146,6 @@ export default function Table<T>(props: ITableProps<T>) {
 
 const Loader = () => (
   <div className="flex h-[200px] w-full items-center justify-center">
-    <h1>Loading...</h1>
-    {/* <img
-      src={}
-      alt="Loading"
-      height={40}
-      width={40}
-      className="animate-pulse duration-100"
-    /> */}
+    <LuLoader />
   </div>
 );

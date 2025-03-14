@@ -9,6 +9,9 @@ import StatusPill from "../../components/status-pill";
 import Table from "../../components/table";
 import CustomButton from "../../components/custom-button";
 import CountUp from "react-countup";
+import { useFetchTasks } from "../../utils/api/dashboard-request";
+import { handleError } from "../../utils/notify";
+import { BsThreeDots } from "react-icons/bs";
 
 const Dashboard = () => {
   const [loading, _setLoading] = useState(false);
@@ -17,19 +20,19 @@ const Dashboard = () => {
   const columns: TableColumn<any>[] = [
     {
       name: "Name",
-      selector: (row) => row?.name,
-      cell: (row) => <p>{row?.name}</p>,
-      minWidth: "250px",
+      selector: (row) => row?.title,
+      cell: (row) => <p>{row?.title}</p>,
+      minWidth: "200px",
     },
     {
       name: "Desc",
-      selector: (row) => row?.desc,
-      cell: (row) => <p>{row?.desc}</p>,
+      selector: (row) => row?.description,
+      cell: (row) => <p>{row?.description}</p>,
       minWidth: "350px",
     },
     {
-      name: "Date/Time",
-      selector: () => format(new Date(Date.now()), "MMMM d, yyyy h:mm a"),
+      name: "Date-Time",
+      selector: (row) => format(new Date(row?.createdAt), "MMMM d, yyyy h:mm a"),
       minWidth: "250px",
     },
     {
@@ -41,22 +44,14 @@ const Dashboard = () => {
     {
       name: "Action",
       selector: (row) => row.status,
-      // cell: () => <img src={downloadIcon} className="h-6" />,
+      cell: () => <BsThreeDots className="h-6 w-6 cursor-pointer" />,
     },
   ];
 
-  const records = [
-    {
-      name: "Create task",
-      desc: "demo project",
-      status: "successful",
-    },
-    {
-      name: "Edit task",
-      desc: "demo project",
-      status: "pending",
-    },
-  ];
+  const { data: tasks, isPending, isError } = useFetchTasks();
+  console.log({ tasks, isPending, isError });
+
+  handleError(isError);
 
   return (
     <Layout header="Dashboard" loading={loading}>
@@ -251,7 +246,7 @@ const Dashboard = () => {
         <aside className="rounded-xl  border-gray-300 p-6 ">
           <p className="py-4 px-3 text-black">Filter:</p>
           <div className="bg-white rounded-3xl py-5 border">
-            <Table columns={columns} data={records} />
+            <Table columns={columns} data={tasks} />
           </div>
         </aside>
       </main>
