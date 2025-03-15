@@ -1,4 +1,5 @@
 import useAxiosInstance from ".";
+import { jwtDecode } from "jwt-decode";
 import { handleGenericError } from "../notify";
 
 const useDashboardApi = () => {
@@ -28,9 +29,38 @@ const useDashboardApi = () => {
     }
   };
 
+  const getUserId = () => {
+    const token = localStorage.getItem("accessToken");
+    if (!token) return null;
+
+    try {
+      const decoded = jwtDecode(token);
+      return (decoded as any)._id;
+    } catch (error) {
+      console.error("Error decoding token", error);
+      return null;
+    }
+  };
+
+  const logout = async () => {
+    const userId = getUserId();
+
+    try {
+      const { data: res } = await axiosInstance.post("auth/logout", userId);
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+
+      return res.data;
+    } catch (error) {
+      handleGenericError(error);
+    }
+  };
+
   return {
     getTasks,
     loginHandler,
+    getUserId,
+    logout,
   };
 };
 

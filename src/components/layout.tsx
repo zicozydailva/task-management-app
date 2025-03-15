@@ -14,7 +14,8 @@ import { RiLogoutBoxRFill } from "react-icons/ri";
 import { cn } from "../lib/utils";
 import { APP_ROUTES, LANDING_PAGE_URL } from "../utils/constants";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
+import useDashboardApi from "../utils/api/dashboard.api";
+import { handleError } from "../utils/notify";
 
 interface Props {
   header: string;
@@ -24,9 +25,9 @@ interface Props {
 }
 
 export default function Layout({ header, subhead, children, loading }: Props) {
-
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const { logout } = useDashboardApi();
 
   const toggleOpen = () => {
     setIsOpen(!isOpen);
@@ -40,10 +41,10 @@ export default function Layout({ header, subhead, children, loading }: Props) {
       color: "text-red-600",
       onclick: async () => {
         try {
-          // await logout();
+          await logout();
           navigate(APP_ROUTES.Login, { replace: true });
         } catch (error) {
-          console.error("Failed to logout:", error);
+          handleError(error);
         }
       },
     },
@@ -57,7 +58,7 @@ export default function Layout({ header, subhead, children, loading }: Props) {
           isOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
-          <div className="relative  h-screen w-[220px] sm:w-[250px]">
+        <div className="relative  h-screen w-[220px] sm:w-[250px]">
           <Sidebar />
           <div className="absolute right-0 top-5">
             <TfiClose size={24} onClick={toggleOpen} />
