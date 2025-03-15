@@ -16,20 +16,16 @@ import Table from "../../components/table";
 import { useFetchTasks } from "../../utils/api/dashboard-request";
 import { handleError } from "../../utils/notify";
 import DeleteConfirmationModal from "../../components/delete-confirmation-modal";
+import Button from "../../components/button";
+import CreateTaskModal from "../../components/create-task-modal";
 
 function Tasks() {
-  const [isUserModalOpen, setIsUserModalOpen] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [selected, setSelected] = useState<Record<string, any>>({});
   const [selectedItem, setSelectedItem] = useState<any>();
 
   const { data: tasks, isPending, isError } = useFetchTasks();
   handleError(isError);
-
-  const handleSelected = (row: any) => {
-    setSelected(row);
-    setIsUserModalOpen(true);
-  };
 
   const columns: TableColumn<any>[] = [
     {
@@ -95,7 +91,7 @@ function Tasks() {
               <FaEdit className="text-md text-black text-center ml-3" />
               <button
                 className={`group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 text-black  data-[focus]:bg-gray-100`}
-                // onClick={() => setIsUserBalanceModalOpen(true)}
+                // onClick={() => setIsCreateModalOpen(true)}
               >
                 Edit
               </button>
@@ -119,6 +115,14 @@ function Tasks() {
 
   return (
     <Layout header="Tasks">
+      <div className="flex items-end justify-end my-4">
+        <Button
+          onClick={() => setIsCreateModalOpen(true)}
+          className="w-1/2 md:w-1/5"
+        >
+          Create Task +
+        </Button>
+      </div>
       <div className="bg-white rounded-3xl py-5 border">
         <Table progressPending={isPending} columns={columns} data={tasks} />
       </div>
@@ -126,6 +130,10 @@ function Tasks() {
         isOpen={isDeleteModalOpen}
         setIsOpen={setIsDeleteModalOpen}
         selectedItem={selectedItem}
+      />
+      <CreateTaskModal
+        isOpen={isCreateModalOpen}
+        setIsOpen={setIsCreateModalOpen}
       />
     </Layout>
   );

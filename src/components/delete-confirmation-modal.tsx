@@ -4,11 +4,12 @@ import Button from "./button";
 import { MdWarning } from "react-icons/md";
 import { handleError, handleGenericSuccess } from "../utils/notify";
 import useDashboardApi from "../utils/api/dashboard.api";
+import { UserInfo } from "../interfaces";
 
 interface Props {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  selectedItem: any;
+  selectedItem:  UserInfo | null;
 }
 
 export default function DeleteConfirmationModal({
