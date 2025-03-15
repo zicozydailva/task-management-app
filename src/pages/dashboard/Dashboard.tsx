@@ -9,7 +9,11 @@ import StatusPill from "../../components/status-pill";
 import Table from "../../components/table";
 import CustomButton from "../../components/custom-button";
 import CountUp from "react-countup";
-import { useFetchTasks, useFetchUsers } from "../../utils/api/dashboard-request";
+import {
+  useFetchTasks,
+  useFetchTaskStatusCount,
+  useFetchUsers,
+} from "../../utils/api/dashboard-request";
 import { handleError } from "../../utils/notify";
 import { BsThreeDots } from "react-icons/bs";
 
@@ -76,6 +80,7 @@ const Dashboard = () => {
     isPending: userFetchPending,
     isError: userFetchError,
   } = useFetchUsers();
+  const { data: taskCounts } = useFetchTaskStatusCount();
 
   handleError(isError || userFetchError);
 
@@ -118,7 +123,7 @@ const Dashboard = () => {
             <div className="space-y">
               <p className="text-sm text-black md:text-base">Pending Tasks</p>
               <p className="text-md font-semibold text-black md:text-xl">
-                <CountUp end={1998} duration={3} />
+                <CountUp end={taskCounts?.statusCounts.pending || 0} duration={3} />
               </p>
             </div>
           </div>
@@ -183,7 +188,7 @@ const Dashboard = () => {
                 In-progress Tasks
               </p>
               <p className="text-md font-semibold text-black md:text-xl">
-                <CountUp end={2024} duration={3} />
+                <CountUp end={taskCounts?.statusCounts["in-progress"] || 0} duration={3} />
               </p>
             </div>
           </div>
@@ -227,7 +232,7 @@ const Dashboard = () => {
             <div className="space-y">
               <p className="text-sm text-black md:text-base">Completed Tasks</p>
               <p className="text-md font-semibold text-black md:text-xl">
-                <CountUp end={2215} duration={3} />
+              <CountUp end={taskCounts?.statusCounts.completed || 0} duration={3} />
               </p>
             </div>
           </div>
@@ -245,7 +250,7 @@ const Dashboard = () => {
         <aside className="rounded-xl md:w-1/2 border border-gray-300 p-4">
           <h2 className=" text-black">Tasks</h2>
           <div className="">
-            <DoughnutChart />
+            <DoughnutChart taskCounts={taskCounts} />
           </div>
         </aside>
       </section>

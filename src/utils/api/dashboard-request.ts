@@ -36,3 +36,12 @@ export const useFetchUsers = () => {
     setPageSize,
   };
 };
+
+export const useFetchTaskStatusCount = () => {
+  const { getTaskStatusCounts } = useDashboardApi();
+
+  return useQuery({
+    queryKey: [queryKeys.tasks],
+    queryFn: () => getTaskStatusCounts(),
+  });
+};

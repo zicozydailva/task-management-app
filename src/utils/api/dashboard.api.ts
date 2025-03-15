@@ -54,6 +54,15 @@ const useDashboardApi = () => {
     }
   };
 
+  const getTaskStatusCounts = async () => {
+    try {
+      const { data: res } = await axiosInstance.get("task/status-counts");
+      return res.data;
+    } catch (error) {
+      handleGenericError(error);
+    }
+  };
+
   const loginHandler = async (data: { email: string; password: string }) => {
     try {
       const { data: res } = await axiosInstance.post("auth/login", data);
@@ -108,6 +117,7 @@ const useDashboardApi = () => {
     getUserId,
     logout,
     getUsers,
+    getTaskStatusCounts,
   };
 };
 
