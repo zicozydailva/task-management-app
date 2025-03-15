@@ -10,6 +10,7 @@ import Users from "./pages/users";
 import { APP_ROUTES } from "./utils/constants";
 import PrivateRoute from "./PrivateRoute";
 import Login from "./pages/auth/Login";
+import Tasks from "./pages/tasks";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         {/* Protected Routes */}
         <Route element={<PrivateRoute />}>
           <Route path={APP_ROUTES.Dashboard} element={<Dashboard />} />
+          <Route path={APP_ROUTES.Tasks} element={<Tasks />} />
           <Route path={APP_ROUTES.Users} element={<Users />} />
         </Route>
       </Routes>

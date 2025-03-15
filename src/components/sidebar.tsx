@@ -1,5 +1,5 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import { cn } from "../lib/utils";
-import { useLocation } from "react-router-dom";
 import dashboardIcon from "../assets/svg/sidebar-icons/dashboard.svg";
 import usersIcon from "../assets/svg/sidebar-icons/users.svg";
 import settingsIcon from "../assets/svg/sidebar-icons/tracker.svg";
@@ -8,6 +8,8 @@ import { APP_ROUTES } from "../utils/constants";
 
 export default function Sidebar() {
   const location = useLocation();
+  const navigate = useNavigate();
+
 
   const routes = [
     {
@@ -43,6 +45,9 @@ export default function Sidebar() {
           {routes.map(({ name, route, icon }, index) => (
             <div className="w-full xl:mb-2" key={index}>
               <div
+                onClick={() => {
+                  navigate(route);
+                }}
                 className={cn(
                   "group flex items-center justify-between pl-6 pr-4 py-4 text-base font-medium text-white hover:bg-[#515A76]/90 w-[200px] mx-4 rounded-xl hover:text-white",
                   location.pathname === route && "bg-[#515A76]"
