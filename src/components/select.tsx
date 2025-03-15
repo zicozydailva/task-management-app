@@ -65,7 +65,7 @@ export default function Select({
         variants
       )}
     >
-      <label htmlFor={name} className="w-full font-medium text-gray-500">
+      <label htmlFor={name} className="w-full font-medium text-primary">
         {label}
       </label>
       <Listbox value={selectedValue} onChange={onChange}>

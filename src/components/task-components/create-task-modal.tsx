@@ -1,11 +1,10 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import Modal from "./modal";
-import Button from "./button";
-import { MdWarning } from "react-icons/md";
-import { handleError, handleGenericSuccess } from "../utils/notify";
-import useDashboardApi from "../utils/api/dashboard.api";
-import Input from "./input";
-import Select from "./select";
+import Modal from "../modal";
+import Button from "../button";
+import { handleError, handleGenericSuccess } from "../../utils/notify";
+import useDashboardApi from "../../utils/api/dashboard.api";
+import Input from "../input";
+import Select from "../select";
 
 interface Props {
   isOpen: boolean;

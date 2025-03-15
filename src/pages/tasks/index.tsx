@@ -15,13 +15,15 @@ import StatusPill from "../../components/status-pill";
 import Table from "../../components/table";
 import { useFetchTasks } from "../../utils/api/dashboard-request";
 import { handleError } from "../../utils/notify";
-import DeleteConfirmationModal from "../../components/delete-confirmation-modal";
 import Button from "../../components/button";
-import CreateTaskModal from "../../components/create-task-modal";
+import CreateTaskModal from "../../components/task-components/create-task-modal";
+import DeleteTaskModal from "../../components/task-components/delete-confirmation-modal";
+import UpdateTaskModal from "../../components/task-components/update-task-modal";
 
 function Tasks() {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<any>();
 
   const { data: tasks, isPending, isError } = useFetchTasks();
@@ -91,7 +93,7 @@ function Tasks() {
               <FaEdit className="text-md text-black text-center ml-3" />
               <button
                 className={`group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 text-black  data-[focus]:bg-gray-100`}
-                // onClick={() => setIsCreateModalOpen(true)}
+                onClick={() => setIsUpdateModalOpen(true)}
               >
                 Edit
               </button>
@@ -126,7 +128,7 @@ function Tasks() {
       <div className="bg-white rounded-3xl py-5 border">
         <Table progressPending={isPending} columns={columns} data={tasks} />
       </div>
-      <DeleteConfirmationModal
+      <DeleteTaskModal
         isOpen={isDeleteModalOpen}
         setIsOpen={setIsDeleteModalOpen}
         selectedItem={selectedItem}
@@ -134,6 +136,11 @@ function Tasks() {
       <CreateTaskModal
         isOpen={isCreateModalOpen}
         setIsOpen={setIsCreateModalOpen}
+      />
+      <UpdateTaskModal
+        isOpen={isUpdateModalOpen}
+        setIsOpen={setIsUpdateModalOpen}
+        selectedItem={selectedItem}
       />
     </Layout>
   );

@@ -40,7 +40,7 @@ export default function Sidebar() {
       <div>logo</div>
 
       {/*SIDE NAVS*/}
-      <div className=" bg-secondary flex-grow">
+      <div className=" bg-primary flex-grow">
         <div className="w-full pt-8">
           {routes.map(({ name, route, icon }, index) => (
             <div className="w-full xl:mb-2" key={index}>
@@ -49,8 +49,8 @@ export default function Sidebar() {
                   navigate(route);
                 }}
                 className={cn(
-                  "group flex items-center justify-between pl-6 pr-4 py-4 text-base font-medium text-white hover:bg-[#515A76]/90 w-[200px] mx-4 rounded-xl hover:text-white",
-                  location.pathname === route && "bg-[#515A76]"
+                  "group flex items-center justify-between pl-6 pr-4 py-4 text-base font-medium text-white hover:bg-secondary/100 w-[200px] mx-4 rounded-xl hover:text-white",
+                  location.pathname === route && "bg-secondary/100"
                 )}
               >
                 <div className="flex items-center space-x-3">

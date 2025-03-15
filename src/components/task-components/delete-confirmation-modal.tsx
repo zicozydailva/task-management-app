@@ -1,10 +1,10 @@
 import { Dispatch, SetStateAction } from "react";
-import Modal from "./modal";
-import Button from "./button";
+import Modal from "../modal";
+import Button from "../button";
 import { MdWarning } from "react-icons/md";
-import { handleError, handleGenericSuccess } from "../utils/notify";
-import useDashboardApi from "../utils/api/dashboard.api";
-import { UserInfo } from "../interfaces";
+import { handleError, handleGenericSuccess } from "../../utils/notify";
+import useDashboardApi from "../../utils/api/dashboard.api";
+import { UserInfo } from "../../interfaces";
 
 interface Props {
   isOpen: boolean;
@@ -12,7 +12,7 @@ interface Props {
   selectedItem:  UserInfo | null;
 }
 
-export default function DeleteConfirmationModal({
+export default function DeleteTaskModal({
   isOpen,
   setIsOpen,
   selectedItem,
