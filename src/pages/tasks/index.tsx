@@ -90,7 +90,7 @@ function Tasks() {
           {" "}
           <MenuItem>
             <div className="flex items-center px-2 border-b border-gray-200">
-              <FaEdit className="text-md text-black text-center ml-3" />
+              <FaEdit className="text-lg text-green-500 text-center ml-3" />
               <button
                 className={`group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 text-black  data-[focus]:bg-gray-100`}
                 onClick={() => setIsUpdateModalOpen(true)}
@@ -101,7 +101,7 @@ function Tasks() {
           </MenuItem>
           <MenuItem>
             <div className="flex items-center px-2 ">
-              <FaTrash className="text-md text-black text-center ml-3" />
+              <FaTrash className="text-md text-red-500 text-center ml-3" />
               <button
                 className={`group flex w-full items-center gap-2 rounded-lg px-3 py-1.5 text-black  data-[focus]:bg-gray-100`}
                 onClick={() => setIsDeleteModalOpen(true)}
@@ -119,8 +119,9 @@ function Tasks() {
     <Layout header="Tasks">
       <div className="flex items-end justify-end my-4">
         <Button
+          rounded={false}
           onClick={() => setIsCreateModalOpen(true)}
-          className="w-1/2 md:w-1/5"
+          className="w-1/2 text-xs md:w-1/5"
         >
           Create Task +
         </Button>

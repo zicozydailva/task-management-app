@@ -35,21 +35,16 @@ const Dashboard = () => {
       minWidth: "350px",
     },
     {
-      name: "Date-Time",
-      selector: (row) =>
-        format(new Date(row?.createdAt), "MMMM d, yyyy h:mm a"),
-      minWidth: "250px",
-    },
-    {
       name: "Status",
       selector: (row) => row.status,
       cell: (row) => <StatusPill status={row.status} />,
       minWidth: "250px",
     },
     {
-      name: "Action",
-      selector: (row) => row.status,
-      cell: () => <BsThreeDots className="h-6 w-6 cursor-pointer" />,
+      name: "Date-Time",
+      selector: (row) =>
+        format(new Date(row?.createdAt), "MMMM d, yyyy h:mm a"),
+      minWidth: "250px",
     },
   ];
 
@@ -123,7 +118,10 @@ const Dashboard = () => {
             <div className="space-y">
               <p className="text-sm text-black md:text-base">Pending Tasks</p>
               <p className="text-md font-semibold text-black md:text-xl">
-                <CountUp end={taskCounts?.statusCounts.pending || 0} duration={3} />
+                <CountUp
+                  end={taskCounts?.statusCounts.pending || 0}
+                  duration={3}
+                />
               </p>
             </div>
           </div>
@@ -188,7 +186,10 @@ const Dashboard = () => {
                 In-progress Tasks
               </p>
               <p className="text-md font-semibold text-black md:text-xl">
-                <CountUp end={taskCounts?.statusCounts["in-progress"] || 0} duration={3} />
+                <CountUp
+                  end={taskCounts?.statusCounts["in-progress"] || 0}
+                  duration={3}
+                />
               </p>
             </div>
           </div>
@@ -232,7 +233,10 @@ const Dashboard = () => {
             <div className="space-y">
               <p className="text-sm text-black md:text-base">Completed Tasks</p>
               <p className="text-md font-semibold text-black md:text-xl">
-              <CountUp end={taskCounts?.statusCounts.completed || 0} duration={3} />
+                <CountUp
+                  end={taskCounts?.statusCounts.completed || 0}
+                  duration={3}
+                />
               </p>
             </div>
           </div>

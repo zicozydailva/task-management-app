@@ -29,8 +29,11 @@ const useDashboardApi = () => {
     status: string;
   }) => {
     try {
-      const { data: res } = await axiosInstance.post("task", data);
-      return res.data;
+      await axiosInstance
+        .post("task", data)
+        .then(() =>
+          queryClient.invalidateQueries({ queryKey: [queryKeys.tasks] })
+        );
     } catch (error) {
       handleGenericError(error);
     }
@@ -38,11 +41,11 @@ const useDashboardApi = () => {
 
   const updateTaskStatus = async (id: string, data: { status: string }) => {
     try {
-      const { data: res } = await axiosInstance.patch(
-        `task/${id}/status`,
-        data
-      );
-      return res.data;
+      await axiosInstance
+        .patch(`task/${id}/status`, data)
+        .then(() =>
+          queryClient.invalidateQueries({ queryKey: [queryKeys.tasks] })
+        );
     } catch (error) {
       handleGenericError(error);
     }

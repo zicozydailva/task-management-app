@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, FormEvent, SetStateAction, useEffect, useState } from "react";
 import Modal from "../modal";
 import Button from "../button";
 import { handleError, handleGenericSuccess } from "../../utils/notify";
@@ -44,7 +44,8 @@ export default function UpdateTaskModal({
     setFormData({ ...formData, status: value });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     try {
       await updateTaskStatus(selectedItem._id, { status: formData.status });
       setIsOpen(false);
