@@ -9,13 +9,13 @@ import {
 } from "recharts";
 
 const data = [
-  { name: "Day 1", eSIM: 100 },
-  { name: "Day 2", eSIM: 300 },
-  { name: "Day 3", eSIM: 400 },
-  { name: "Day 4", eSIM: 200 },
-  { name: "Day 5", eSIM: 500 },
-  { name: "Day 6", eSIM: 400 },
-  { name: "Day 7", eSIM: 300 },
+  { name: "Jan", value: 100 },
+  { name: "Feb", value: 300 },
+  { name: "Mar", value: 400 },
+  { name: "April", value: 200 },
+  { name: "May", value: 500 },
+  { name: "June", value: 400 },
+  { name: "July", value: 300 },
 ];
 
 const ActiveEsimChart = () => {
@@ -29,7 +29,7 @@ const ActiveEsimChart = () => {
         <XAxis dataKey="name" stroke="#000" />
         <YAxis stroke="#000" />
         <Tooltip />
-        <Line type="monotone" dataKey="eSIM" stroke="#007bff" strokeWidth={3} />
+        <Line type="monotone" dataKey="value" stroke="#007bff" strokeWidth={3} />
       </LineChart>
     </ResponsiveContainer>
   );

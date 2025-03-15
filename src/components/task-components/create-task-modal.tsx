@@ -5,6 +5,7 @@ import { handleError, handleGenericSuccess } from "../../utils/notify";
 import useDashboardApi from "../../utils/api/dashboard.api";
 import Input from "../input";
 import Select from "../select";
+import TextArea from "../text-area";
 
 interface Props {
   isOpen: boolean;
@@ -72,7 +73,7 @@ export default function CreateTaskModal({ isOpen, setIsOpen }: Props) {
             onChange={handleChange}
             variant="light"
           />
-          <Input
+          <TextArea
             name="description"
             value={formData.description}
             placeholder="Task description"

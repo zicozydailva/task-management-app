@@ -50,8 +50,8 @@ export default function Sidebar() {
                   navigate(route);
                 }}
                 className={cn(
-                  "group flex items-center justify-between pl-6 pr-4 py-4 text-base font-medium text-white hover:bg-secondary/100 w-[200px] mx-4 rounded-xl hover:text-white",
-                  location.pathname === route && "bg-secondary/100"
+                  "group flex items-center justify-between pl-6 pr-4 py-4 text-base font-medium text-white hover:bg-[#192f6f]/100 w-[200px] mx-4 rounded-xl hover:text-white",
+                  location.pathname === route && "bg-[#192f6f]/100"
                 )}
               >
                 <div className="flex items-center space-x-3">
