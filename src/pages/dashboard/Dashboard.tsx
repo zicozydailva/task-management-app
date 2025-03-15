@@ -32,7 +32,8 @@ const Dashboard = () => {
     },
     {
       name: "Date-Time",
-      selector: (row) => format(new Date(row?.createdAt), "MMMM d, yyyy h:mm a"),
+      selector: (row) =>
+        format(new Date(row?.createdAt), "MMMM d, yyyy h:mm a"),
       minWidth: "250px",
     },
     {
@@ -246,7 +247,7 @@ const Dashboard = () => {
         <aside className="rounded-xl  border-gray-300 p-6 ">
           <p className="py-4 px-3 text-black">Filter:</p>
           <div className="bg-white rounded-3xl py-5 border">
-            <Table columns={columns} data={tasks} />
+            <Table progressPending={isPending} columns={columns} data={tasks} />
           </div>
         </aside>
       </main>

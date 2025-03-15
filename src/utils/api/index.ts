@@ -16,8 +16,10 @@ const useAxiosInstance = (multipart = false) => {
   instance.interceptors.request.use(
     async (config) => {
       try {
-        const token =
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2Q0NmEyNDFkYjhiMjM1ZGNmODIyNDciLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkdGxaYlVLak9PSU1kMUhGT1EyT2RNLlNqbEZ5cXFkTmR5cG1lOGhyRmlaaThDaG5SWlBPVWEiLCJjcmVhdGVkQXQiOiIyMDI1LTAzLTE0VDE3OjQwOjUyLjQzOFoiLCJ1cGRhdGVkQXQiOiIyMDI1LTAzLTE0VDE3OjQyOjU2Ljk1MVoiLCJfX3YiOjAsInNlc3Npb25JZCI6IkRBMXl0dnFRUVFiUFB4UzdhMzhMRiIsImlhdCI6MTc0MTk3OTcxMCwiZXhwIjoxNzQzMTg5MzEwfQ.suuBROYFur3DrXOWvvVFP5_5owsO63WFFhPTfzsKdOc";
+        // const token =
+        //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2Q0NmEyNDFkYjhiMjM1ZGNmODIyNDciLCJmaXJzdE5hbWUiOiJKb2huIiwibGFzdE5hbWUiOiJEb2UiLCJlbWFpbCI6ImpvaG5AZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkdGxaYlVLak9PSU1kMUhGT1EyT2RNLlNqbEZ5cXFkTmR5cG1lOGhyRmlaaThDaG5SWlBPVWEiLCJjcmVhdGVkQXQiOiIyMDI1LTAzLTE0VDE3OjQwOjUyLjQzOFoiLCJ1cGRhdGVkQXQiOiIyMDI1LTAzLTE0VDE3OjQyOjU2Ljk1MVoiLCJfX3YiOjAsInNlc3Npb25JZCI6IkRBMXl0dnFRUVFiUFB4UzdhMzhMRiIsImlhdCI6MTc0MTk3OTcxMCwiZXhwIjoxNzQzMTg5MzEwfQ.suuBROYFur3DrXOWvvVFP5_5owsO63WFFhPTfzsKdOc";
+
+        const token = localStorage.getItem("accessToken");
 
         config.headers.Authorization = `Bearer ${token}`;
       } catch (error) {

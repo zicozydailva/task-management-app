@@ -19,3 +19,12 @@ export const useFetchTasks = (filters = {}) => {
     setPageSize,
   };
 };
+
+export const useLogin = (data: { email: string; password: string }) => {
+  const { loginHandler } = useDashboardApi();
+
+  return useQuery({
+    queryKey: [queryKeys.login],
+    queryFn: () => loginHandler(data),
+  });
+};

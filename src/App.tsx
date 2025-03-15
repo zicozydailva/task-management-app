@@ -9,7 +9,7 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import Users from "./pages/users";
 import { APP_ROUTES } from "./utils/constants";
 import PrivateRoute from "./PrivateRoute";
-import Login from "./pages/auth/LoginPage";
+import Login from "./pages/auth/Login";
 
 function App() {
   return (

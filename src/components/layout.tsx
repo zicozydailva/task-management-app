@@ -24,7 +24,7 @@ interface Props {
 }
 
 export default function Layout({ header, subhead, children, loading }: Props) {
-  const { user, logout } = useAuth0();
+
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -40,7 +40,7 @@ export default function Layout({ header, subhead, children, loading }: Props) {
       color: "text-red-600",
       onclick: async () => {
         try {
-          await logout();
+          // await logout();
           navigate(APP_ROUTES.Login, { replace: true });
         } catch (error) {
           console.error("Failed to logout:", error);
@@ -57,8 +57,7 @@ export default function Layout({ header, subhead, children, loading }: Props) {
           isOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        <div>
-          {/* <div className="relative  h-screen w-[220px] sm:w-[250px]"> */}
+          <div className="relative  h-screen w-[220px] sm:w-[250px]">
           <Sidebar />
           <div className="absolute right-0 top-5">
             <TfiClose size={24} onClick={toggleOpen} />
@@ -96,7 +95,7 @@ export default function Layout({ header, subhead, children, loading }: Props) {
                     {/* <img src={arrowUpImage} alt="User" height={25} width={25} /> */}
                   </div>
                   <div className="relative h-10 w-10 overflow-hidden rounded-full border border-gray-400">
-                    <img src={user?.picture} alt={user?.name} />
+                    {/* <img src={user?.picture} alt={user?.name} /> */}
                   </div>
                 </section>
               </MenuButton>
