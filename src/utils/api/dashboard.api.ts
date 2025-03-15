@@ -1,9 +1,12 @@
 import useAxiosInstance from ".";
 import { jwtDecode } from "jwt-decode";
 import { handleGenericError } from "../notify";
+import { useQueryClient } from "@tanstack/react-query";
+import { queryKeys } from "../constants";
 
 const useDashboardApi = () => {
   const axiosInstance = useAxiosInstance();
+  const queryClient = useQueryClient();
 
   const getTasks = async (page?: number, limit?: number) => {
     try {
@@ -47,8 +50,11 @@ const useDashboardApi = () => {
 
   const deleteTask = async (id: string) => {
     try {
-      const { data: res } = await axiosInstance.delete(`task/${id}`);
-      return res.data;
+      await axiosInstance
+        .delete(`task/${id}`)
+        .then(() =>
+          queryClient.invalidateQueries({ queryKey: [queryKeys.tasks] })
+        );
     } catch (error) {
       handleGenericError(error);
     }

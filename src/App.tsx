@@ -11,6 +11,7 @@ import { APP_ROUTES } from "./utils/constants";
 import PrivateRoute from "./PrivateRoute";
 import Login from "./pages/auth/Login";
 import Tasks from "./pages/tasks";
+import Settings from "./pages/settings";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path={APP_ROUTES.Dashboard} element={<Dashboard />} />
           <Route path={APP_ROUTES.Tasks} element={<Tasks />} />
           <Route path={APP_ROUTES.Users} element={<Users />} />
+          <Route path={APP_ROUTES.Settings} element={<Settings />} />
         </Route>
       </Routes>
     </Router>
