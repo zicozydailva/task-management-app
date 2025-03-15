@@ -36,8 +36,8 @@ export default function Sidebar() {
   return (
     <aside className="fixed z-10 h-screen overflow-y-auto w-[250px] sm:w-[250px] flex flex-col gap-6 border-r border-gray-200 bg-white overflow-x-hidden pt-6">
       {/*LOGO*/}
-      <div className="w-12 h-12 mx-auto bg-primary rounded-full flex items-center justify-center text-white text-lg font-bold">
-        DeW
+      <div className="w-12 h-12 mx-auto rounded-full flex items-center justify-center text-white text-lg font-bold">
+        
       </div>
 
       {/*SIDE NAVS*/}

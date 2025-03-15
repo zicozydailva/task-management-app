@@ -17,7 +17,7 @@ import { Link, useNavigate } from "react-router-dom";
 import useDashboardApi from "../utils/api/dashboard.api";
 import { handleError } from "../utils/notify";
 import { FaPersonBooth } from "react-icons/fa";
-
+import userAvatar from "../assets/images/user-avatar.png";
 interface Props {
   header: string;
   subhead?: string;
@@ -95,8 +95,12 @@ export default function Layout({ header, subhead, children, loading }: Props) {
                       </Link>
                     </p>
                   </div>
-                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white text-lg font-bold">
-                    JD
+                  <div>
+                    <img
+                      className="h-12 w-12 rounded-full"
+                      src={userAvatar}
+                      alt="user-avatar"
+                    />
                   </div>
                 </section>
               </MenuButton>
