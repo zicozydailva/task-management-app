@@ -9,7 +9,7 @@ import StatusPill from "../../components/status-pill";
 import Table from "../../components/table";
 import CustomButton from "../../components/custom-button";
 import CountUp from "react-countup";
-import { useFetchTasks } from "../../utils/api/dashboard-request";
+import { useFetchTasks, useFetchUsers } from "../../utils/api/dashboard-request";
 import { handleError } from "../../utils/notify";
 import { BsThreeDots } from "react-icons/bs";
 
@@ -49,10 +49,35 @@ const Dashboard = () => {
     },
   ];
 
-  const { data: tasks, isPending, isError } = useFetchTasks();
-  console.log({ tasks, isPending, isError });
+  const usersColumns: TableColumn<any>[] = [
+    {
+      name: "First Name",
+      selector: (row) => row?.firstName,
+      cell: (row) => <p>{row?.firstName}</p>,
+      minWidth: "100px",
+    },
+    {
+      name: "Last Nam",
+      selector: (row) => row?.lastName,
+      cell: (row) => <p>{row?.lastName}</p>,
+      minWidth: "100px",
+    },
+    {
+      name: "Email",
+      selector: (row) => row?.email,
+      cell: (row) => <p>{row?.email}</p>,
+      minWidth: "200px",
+    },
+  ];
 
-  handleError(isError);
+  const { data: tasks, isPending, isError } = useFetchTasks();
+  const {
+    data: users,
+    isPending: userFetchPending,
+    isError: userFetchError,
+  } = useFetchUsers();
+
+  handleError(isError || userFetchError);
 
   return (
     <Layout header="Dashboard" loading={loading}>
@@ -230,7 +255,10 @@ const Dashboard = () => {
           <div className="flex justify-between">
             <CustomButton
               size="md"
-              onClick={() => setActiveTab(1)}
+              onClick={() => {
+                console.log("clicked", activeTab);
+                setActiveTab(1);
+              }}
               variant={activeTab === 1 ? "primary" : "primary_outlined"}
             >
               Tasks
@@ -238,17 +266,35 @@ const Dashboard = () => {
             <CustomButton
               size="md"
               variant={activeTab === 2 ? "primary" : "primary_outlined"}
-              onClick={() => setActiveTab(2)}
+              onClick={() => {
+                console.log("clicked", activeTab);
+                setActiveTab(2);
+              }}
             >
               Users
             </CustomButton>
           </div>
         </div>
         <aside className="rounded-xl  border-gray-300 p-6 ">
-          <p className="py-4 px-3 text-black">Filter:</p>
-          <div className="bg-white rounded-3xl py-5 border">
-            <Table progressPending={isPending} columns={columns} data={tasks} />
-          </div>
+          {activeTab == 1 && (
+            <div className="bg-white rounded-3xl py-5 border">
+              <Table
+                progressPending={isPending}
+                columns={columns}
+                data={tasks}
+              />
+            </div>
+          )}
+
+          {activeTab == 2 && (
+            <div className="bg-white rounded-3xl py-5 border">
+              <Table
+                progressPending={userFetchPending}
+                columns={usersColumns}
+                data={users}
+              />
+            </div>
+          )}
         </aside>
       </main>
     </Layout>
