@@ -56,11 +56,21 @@ const useDashboardApi = () => {
     }
   };
 
+  const getUsers = async () => {
+    try {
+      const { data: res } = await axiosInstance.get("users");
+      return res.data;
+    } catch (error) {
+      handleGenericError(error);
+    }
+  };
+
   return {
     getTasks,
     loginHandler,
     getUserId,
     logout,
+    getUsers,
   };
 };
 
