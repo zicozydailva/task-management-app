@@ -20,6 +20,40 @@ const useDashboardApi = () => {
     }
   };
 
+  const createTask = async (data: {
+    title: string;
+    description: string;
+    status: string;
+  }) => {
+    try {
+      const { data: res } = await axiosInstance.post("task", data);
+      return res.data;
+    } catch (error) {
+      handleGenericError(error);
+    }
+  };
+
+  const updateTaskStatus = async (id: string, data: { status: string }) => {
+    try {
+      const { data: res } = await axiosInstance.patch(
+        `task/${id}/status`,
+        data
+      );
+      return res.data;
+    } catch (error) {
+      handleGenericError(error);
+    }
+  };
+
+  const deleteTask = async (id: string) => {
+    try {
+      const { data: res } = await axiosInstance.delete(`task/${id}`);
+      return res.data;
+    } catch (error) {
+      handleGenericError(error);
+    }
+  };
+
   const loginHandler = async (data: { email: string; password: string }) => {
     try {
       const { data: res } = await axiosInstance.post("auth/login", data);
@@ -67,6 +101,9 @@ const useDashboardApi = () => {
 
   return {
     getTasks,
+    createTask,
+    updateTaskStatus,
+    deleteTask,
     loginHandler,
     getUserId,
     logout,
