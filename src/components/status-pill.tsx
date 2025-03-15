@@ -21,7 +21,7 @@ export default function StatusPill({ status, size = "xs" }: Props) {
   return (
     <div
       className={cn(
-        "rounded-full px-4 py-2 capitalize w-24 text-center",
+        "rounded-full px-4 py-2 capitalize w-30 text-center",
         sizes,
         statuses
       )}
