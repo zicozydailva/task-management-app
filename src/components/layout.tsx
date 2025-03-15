@@ -16,6 +16,7 @@ import { APP_ROUTES, LANDING_PAGE_URL } from "../utils/constants";
 import { Link, useNavigate } from "react-router-dom";
 import useDashboardApi from "../utils/api/dashboard.api";
 import { handleError } from "../utils/notify";
+import { FaPersonBooth } from "react-icons/fa";
 
 interface Props {
   header: string;
@@ -74,7 +75,7 @@ export default function Layout({ header, subhead, children, loading }: Props) {
             <div className="xl:hidden">
               <FcMenu size={24} className="text-primary" onClick={toggleOpen} />
             </div>
-            <div className="block ">
+            <div className="block">
               <h1 className="text-xl font-medium text-primary">{header}</h1>
               {subhead && <p className="text-sm text-gray-500">{subhead}</p>}
             </div>
@@ -93,10 +94,9 @@ export default function Layout({ header, subhead, children, loading }: Props) {
                         Go to website
                       </Link>
                     </p>
-                    {/* <img src={arrowUpImage} alt="User" height={25} width={25} /> */}
                   </div>
-                  <div className="relative h-10 w-10 overflow-hidden rounded-full border border-gray-400">
-                    {/* <img src={user?.picture} alt={user?.name} /> */}
+                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white text-lg font-bold">
+                    JD
                   </div>
                 </section>
               </MenuButton>
