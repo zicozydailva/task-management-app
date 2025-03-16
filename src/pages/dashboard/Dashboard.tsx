@@ -286,7 +286,7 @@ const Dashboard = () => {
         <aside className=" md:w-2/3 rounded-xl border border-gray-300 p-8">
           <h2 className="mb-4 text-black">Users</h2>
           <h2 className="mb-4 font-semibold text-2xl text-black">
-            <CountUp end={141} duration={3} />
+            <CountUp end={users?.length || 0} duration={3} />
           </h2>
           <ActiveEsimChart />
         </aside>

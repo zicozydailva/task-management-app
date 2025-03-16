@@ -43,7 +43,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex h-screen w-screen flex-col bg-background px-5 md:px-24">
+    <div className="flex h-screen w-screen flex-col bg-background bg-gradient-to-br from-blue-200 to-blue-300 px-5 md:px-24">
       <header className="py-6"></header>
       <main className="mt-28 flex w-full justify-center md:mt-48">
         <form className="w-full md:w-[450px]" onSubmit={handleSubmit}>
@@ -68,7 +68,7 @@ const Login = () => {
             />
           </div>
           <div className="mt-4 text-sm text-primary">
-            <a href={"/"}>Forgot Password?</a>
+            <a href={"#"}>Forgot Password?</a>
           </div>
           <Button
             className="mt-10"
