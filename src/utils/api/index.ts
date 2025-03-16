@@ -33,7 +33,7 @@ const useAxiosInstance = (multipart = false) => {
       if (error.response?.status === 401) {
         console.warn("Session expired. Logging out...");
         localStorage.removeItem("accessToken");
-        window.location.href = "/auth/login";
+        window.location.href = "/";
       }
 
       return Promise.reject(error);

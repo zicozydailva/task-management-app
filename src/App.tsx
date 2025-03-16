@@ -12,14 +12,14 @@ import PrivateRoute from "./PrivateRoute";
 import Login from "./pages/auth/Login";
 import Tasks from "./pages/tasks";
 import Settings from "./pages/settings";
+import Home from "./pages/home";
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* Public Route */}
-        <Route path={APP_ROUTES.Login} element={<Navigate to="auth/login" />} />
-        <Route path={APP_ROUTES.Home} element={<Navigate to="/dashboard" />} />
+        <Route path={APP_ROUTES.Login} element={<Login />} />
+        <Route path={APP_ROUTES.Home} element={<Home />} />
 
         {/* Protected Routes */}
         <Route element={<PrivateRoute />}>
@@ -28,6 +28,9 @@ function App() {
           <Route path={APP_ROUTES.Users} element={<Users />} />
           <Route path={APP_ROUTES.Settings} element={<Settings />} />
         </Route>
+
+        {/* Redirect unknown routes */}
+        <Route path="*" element={<Navigate to={APP_ROUTES.Home} />} />
       </Routes>
     </Router>
   );
