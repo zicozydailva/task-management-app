@@ -46,7 +46,6 @@ const renderCustomizedLabel = ({
 };
 
 const DoughnutChart = ({ taskCounts }) => {
-  console.log({ taskCounts });
   const chartData = [
     {
       name: "Pending",

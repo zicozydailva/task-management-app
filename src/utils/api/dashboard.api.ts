@@ -73,12 +73,8 @@ const useDashboardApi = () => {
   };
 
   const loginHandler = async (data: { email: string; password: string }) => {
-    try {
-      const { data: res } = await axiosInstance.post("auth/login", data);
-      return res.data;
-    } catch (error) {
-      handleGenericError(error);
-    }
+    const { data: res } = await axiosInstance.post("auth/login", data);
+    return res.data;
   };
 
   const getUserId = () => {

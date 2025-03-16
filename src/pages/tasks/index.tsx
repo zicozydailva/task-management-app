@@ -68,7 +68,6 @@ function Tasks() {
       <MenuButton
         onClick={() => {
           setSelectedItem((_prevItem: any) => {
-            console.log({ item });
             return item;
           });
         }}

@@ -1,7 +1,11 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import Input from "../../components/input";
 import Button from "../../components/button";
-import { handleGenericSuccess } from "../../utils/notify";
+import {
+  handleError,
+  handleGenericError,
+  handleGenericSuccess,
+} from "../../utils/notify";
 import useDashboardApi from "../../utils/api/dashboard.api";
 import { useNavigate } from "react-router-dom";
 
@@ -26,7 +30,6 @@ const Login = () => {
     setLoading(true);
     try {
       const res = await loginHandler(data);
-      console.log({ res });
 
       if (res?.token.accessToken) {
         localStorage.setItem("accessToken", res.token.accessToken);
@@ -37,6 +40,8 @@ const Login = () => {
         navigate("/dashboard");
       }
       setLoading(false);
+    } catch (e) {
+      handleError(e);
     } finally {
       setLoading(false);
     }

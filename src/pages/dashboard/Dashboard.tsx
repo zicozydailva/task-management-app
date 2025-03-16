@@ -304,7 +304,6 @@ const Dashboard = () => {
             <CustomButton
               size="md"
               onClick={() => {
-                console.log("clicked", activeTab);
                 setActiveTab(1);
               }}
               variant={activeTab === 1 ? "primary" : "primary_outlined"}
@@ -315,7 +314,6 @@ const Dashboard = () => {
               size="md"
               variant={activeTab === 2 ? "primary" : "primary_outlined"}
               onClick={() => {
-                console.log("clicked", activeTab);
                 setActiveTab(2);
               }}
             >
