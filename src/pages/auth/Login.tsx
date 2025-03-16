@@ -6,7 +6,6 @@ import useDashboardApi from "../../utils/api/dashboard.api";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const isAuthenticated = true;
   const [loading, setLoading] = useState(false);
   const { loginHandler } = useDashboardApi();
   const navigate = useNavigate();
@@ -20,10 +19,6 @@ const Login = () => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
-
-  if (isAuthenticated) {
-    // return <Navigate to="/dashboard" replace />;
-  }
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -49,14 +44,7 @@ const Login = () => {
 
   return (
     <div className="flex h-screen w-screen flex-col bg-background px-5 md:px-24">
-      <header className="py-6">
-        {/* <Image
-          src="/assets/svg/palremit-logo.svg"
-          alt="Palremit"
-          height={150}
-          width={150}
-        /> */}
-      </header>
+      <header className="py-6"></header>
       <main className="mt-28 flex w-full justify-center md:mt-48">
         <form className="w-full md:w-[450px]" onSubmit={handleSubmit}>
           <h1 className="mb-6 text-xl font-bold text-primary">

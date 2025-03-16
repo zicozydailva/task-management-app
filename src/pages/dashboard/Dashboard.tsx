@@ -15,7 +15,6 @@ import {
   useFetchUsers,
 } from "../../utils/api/dashboard-request";
 import { handleError } from "../../utils/notify";
-import { BsThreeDots } from "react-icons/bs";
 
 const Dashboard = () => {
   const [loading, _setLoading] = useState(false);

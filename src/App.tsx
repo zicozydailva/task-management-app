@@ -18,9 +18,8 @@ function App() {
     <Router>
       <Routes>
         {/* Public Route */}
-        {/* <Route path={APP_ROUTES.Home} element={<Navigate to="auth/login" />} /> */}
+        <Route path={APP_ROUTES.Login} element={<Navigate to="auth/login" />} />
         <Route path={APP_ROUTES.Home} element={<Navigate to="/dashboard" />} />
-        <Route path={APP_ROUTES.Login} element={<Login />} />
 
         {/* Protected Routes */}
         <Route element={<PrivateRoute />}>

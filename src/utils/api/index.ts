@@ -30,8 +30,6 @@ const useAxiosInstance = (multipart = false) => {
   instance.interceptors.response.use(
     (response) => response,
     async (error) => {
-      console.error("Response Error:", error);
-
       if (error.response?.status === 401) {
         console.warn("Session expired. Logging out...");
         localStorage.removeItem("accessToken");
