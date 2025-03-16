@@ -117,7 +117,10 @@ function Tasks() {
 
   return (
     <Layout header="Tasks">
-      <div className="flex items-end justify-end my-4">
+      <div className="flex items-center justify-between my-4">
+        <div className="text-gray-400 px-5">
+          <h1 className="text-sm">Total Tasks: {tasks.length}</h1>
+        </div>
         <Button
           rounded={false}
           onClick={() => setIsCreateModalOpen(true)}
