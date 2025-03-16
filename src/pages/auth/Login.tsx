@@ -42,6 +42,7 @@ const Login = () => {
       setLoading(false);
     } catch (e) {
       handleError(e);
+      setLoading(false);
     } finally {
       setLoading(false);
     }
