@@ -98,9 +98,9 @@ const SignUp = () => {
             />
           </div>
           <div className="mt-4 text-sm text-primary flex justify-between">
-            <span className="text-black">
+            <span className="text-primary text-xs">
               Already have an account?{" "}
-              <a className="font-bold cursor-pointer" href="/auth/login">
+              <a className="font-semibold cursor-pointer" href="/auth/login">
                 Login
               </a>{" "}
             </span>

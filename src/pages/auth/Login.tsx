@@ -56,7 +56,7 @@ const Login = () => {
       ></div>
 
       {/* Login Form Section */}
-      <div className="flex w-full md:w-1/2 flex-col justify-center items-center bg-gradient-to-br from-blue-200 to-blue-300 px-5 md:px-24">
+      <div className="h-screen flex w-full md:w-1/2 flex-col justify-center items-center bg-gradient-to-br from-blue-200 to-blue-300 px-5 md:px-24">
         <form className="w-full max-w-md" onSubmit={handleSubmit}>
           <h1 className="mb-6 text-xl font-bold text-primary">
             Login To Dashboard
@@ -79,9 +79,9 @@ const Login = () => {
             />
           </div>
           <div className="mt-4 text-sm text-primary flex justify-between">
-            <span className="text-black">
+            <span className="text-black text-xs">
               Don't have an account?{" "}
-              <a className="font-bold cursor-pointer" href="/auth/signup">
+              <a className="font-semibold text-primary cursor-pointer" href="/auth/signup">
                 Sign Up
               </a>{" "}
             </span>
