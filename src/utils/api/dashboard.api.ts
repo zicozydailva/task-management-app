@@ -87,24 +87,9 @@ const useDashboardApi = () => {
     return res.data;
   };
 
-  const getUserId = () => {
-    const token = localStorage.getItem("accessToken");
-    if (!token) return null;
-
-    try {
-      const decoded = jwtDecode(token);
-      return (decoded as any)._id;
-    } catch (error) {
-      console.error("Error decoding token", error);
-      return null;
-    }
-  };
-
   const logout = async () => {
-    const userId = getUserId();
-
     try {
-      const { data: res } = await axiosInstance.post("auth/logout", userId);
+      const { data: res } = await axiosInstance.post("auth/logout");
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
 
@@ -129,7 +114,6 @@ const useDashboardApi = () => {
     updateTaskStatus,
     deleteTask,
     loginHandler,
-    getUserId,
     logout,
     getUsers,
     getTaskStatusCounts,
