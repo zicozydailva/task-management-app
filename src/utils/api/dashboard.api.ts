@@ -77,6 +77,16 @@ const useDashboardApi = () => {
     return res.data;
   };
 
+  const signUpHandler = async (data: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+  }) => {
+    const { data: res } = await axiosInstance.post("auth/signup", data);
+    return res.data;
+  };
+
   const getUserId = () => {
     const token = localStorage.getItem("accessToken");
     if (!token) return null;
@@ -123,6 +133,7 @@ const useDashboardApi = () => {
     logout,
     getUsers,
     getTaskStatusCounts,
+    signUpHandler,
   };
 };
 

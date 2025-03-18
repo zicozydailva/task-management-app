@@ -5,12 +5,14 @@ import { handleError, handleGenericSuccess } from "../../utils/notify";
 import useDashboardApi from "../../utils/api/dashboard.api";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const SignUp = () => {
   const [loading, setLoading] = useState(false);
-  const { loginHandler } = useDashboardApi();
+  const { signUpHandler } = useDashboardApi();
   const navigate = useNavigate();
 
   const [data, setData] = useState({
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
   });
@@ -25,15 +27,15 @@ const Login = () => {
 
     setLoading(true);
     try {
-      const res = await loginHandler(data);
+      const res = await signUpHandler(data);
 
       if (res?.token.accessToken) {
         localStorage.setItem("accessToken", res.token.accessToken);
         localStorage.setItem("refreshToken", res.token.refreshToken);
         localStorage.setItem("sessionId", res.token.sessionId);
 
-        handleGenericSuccess("Login Successful");
-        navigate("/dashboard");
+        handleGenericSuccess("Account Created Succesfully");
+        navigate("/auth/login");
       }
       setLoading(false);
     } catch (e) {
@@ -47,11 +49,27 @@ const Login = () => {
   return (
     <div className="flex h-screen w-screen flex-col bg-background bg-gradient-to-br from-blue-200 to-blue-300 px-5 md:px-24">
       <header className="py-6"></header>
-      <main className="mt-28 flex w-full justify-center md:mt-48">
+      <main className="flex w-full justify-center">
         <form className="w-full md:w-[450px]" onSubmit={handleSubmit}>
           <h1 className="mb-6 text-xl font-bold text-primary">
-            Login To Dashboard
+            Create An Account
           </h1>
+          <div className="space-y-3 mb-6">
+            <Input
+              name="firstName"
+              label="First Name"
+              placeholder="John@gmail.com"
+              value={data.firstName}
+              onChange={handleChange}
+            />
+            <Input
+              name="lastName"
+              label="Last Name"
+              placeholder="Doe"
+              value={data.lastName}
+              onChange={handleChange}
+            />
+          </div>
           <div className="space-y-3">
             <Input
               name="email"
@@ -71,7 +89,10 @@ const Login = () => {
           </div>
           <div className="mt-4 text-sm text-primary flex justify-between">
             <span className="text-black">
-              Don't have an account? <a className="font-bold cursor-pointer" href="/auth/signup">Sign Up</a>{" "}
+              Already have an account?{" "}
+              <a className="font-bold cursor-pointer" href="/auth/login">
+                Login
+              </a>{" "}
             </span>
             <a href={"#"}>Forgot Password?</a>
           </div>
@@ -79,9 +100,11 @@ const Login = () => {
             className="mt-10"
             type="submit"
             loading={loading}
-            disabled={!(data.email && data.password)}
+            disabled={
+              !(data.firstName && data.lastName && data.email && data.password)
+            }
           >
-            Login
+            Sign Up
           </Button>
         </form>
       </main>
@@ -89,4 +112,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;

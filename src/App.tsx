@@ -13,12 +13,14 @@ import Login from "./pages/auth/Login";
 import Tasks from "./pages/tasks";
 import Settings from "./pages/settings";
 import Home from "./pages/home";
+import SignUp from "./pages/auth/SignUp";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path={APP_ROUTES.Login} element={<Login />} />
+        <Route path={APP_ROUTES.SignUp} element={<SignUp />} />
         <Route path={APP_ROUTES.Home} element={<Home />} />
 
         {/* Protected Routes */}
