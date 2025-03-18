@@ -45,10 +45,19 @@ const Login = () => {
   };
 
   return (
-    <div className="flex h-screen w-screen flex-col bg-background bg-gradient-to-br from-blue-200 to-blue-300 px-5 md:px-24">
-      <header className="py-6"></header>
-      <main className="mt-28 flex w-full justify-center md:mt-48">
-        <form className="w-full md:w-[450px]" onSubmit={handleSubmit}>
+    <div className="flex h-screen w-screen flex-col md:flex-row">
+      {/* Image Section (Hidden on Mobile) */}
+      <div
+        className="hidden md:flex md:w-1/2 bg-blue-400 bg-cover bg-center"
+        style={{
+          backgroundImage:
+            "url('https://plus.unsplash.com/premium_photo-1723291359453-aea7e6bcbebd?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8bWFuYWdlbWVudHxlbnwwfHwwfHx8MA%3D%3D')",
+        }}
+      ></div>
+
+      {/* Login Form Section */}
+      <div className="flex w-full md:w-1/2 flex-col justify-center items-center bg-gradient-to-br from-blue-200 to-blue-300 px-5 md:px-24">
+        <form className="w-full max-w-md" onSubmit={handleSubmit}>
           <h1 className="mb-6 text-xl font-bold text-primary">
             Login To Dashboard
           </h1>
@@ -71,7 +80,10 @@ const Login = () => {
           </div>
           <div className="mt-4 text-sm text-primary flex justify-between">
             <span className="text-black">
-              Don't have an account? <a className="font-bold cursor-pointer" href="/auth/signup">Sign Up</a>{" "}
+              Don't have an account?{" "}
+              <a className="font-bold cursor-pointer" href="/auth/signup">
+                Sign Up
+              </a>{" "}
             </span>
             <a href={"#"}>Forgot Password?</a>
           </div>
@@ -84,7 +96,7 @@ const Login = () => {
             Login
           </Button>
         </form>
-      </main>
+      </div>
     </div>
   );
 };
